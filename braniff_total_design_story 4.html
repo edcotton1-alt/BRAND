@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Braniff: How They Sold the End of the Plain Plane</title>
+  <style>
+    :root {
+      --paper: #f7efe2;
+      --ink: #171412;
+      --muted: #5e554a;
+      --line: #241f1a;
+      --orange: #f05a28;
+      --yellow: #f3ba31;
+      --turquoise: #00a7b5;
+      --blue: #1b4f9c;
+      --ochre: #c98d2b;
+      --beige: #d6c09a;
+      --red: #d83323;
+      --cream: #fff9ee;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(23,20,18,.035) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(23,20,18,.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 36px 36px;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    .page {
+      width: min(1240px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 96vh;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 38px;
+      align-items: center;
+      padding: 42px 0 36px;
+      border-bottom: 4px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 2px solid var(--line);
+      background: var(--cream);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: var(--orange);
+      border-radius: 50%;
+      box-shadow: 18px 0 0 var(--yellow), 36px 0 0 var(--turquoise), 54px 0 0 var(--blue);
+    }
+
+    h1 {
+      margin: 28px 0 18px;
+      max-width: 760px;
+      font-size: clamp(54px, 8vw, 112px);
+      line-height: .86;
+      letter-spacing: -.065em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.14;
+      font-weight: 800;
+    }
+
+    .hero-copy span {
+      background: var(--orange);
+      color: var(--cream);
+      padding: 0 .18em;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+      max-width: 690px;
+    }
+
+    .stat {
+      border: 2px solid var(--line);
+      background: var(--cream);
+      padding: 14px;
+      min-height: 120px;
+    }
+
+    .stat b {
+      display: block;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: .95;
+      letter-spacing: -.04em;
+    }
+
+    .stat small {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 680px;
+      border: 3px solid var(--line);
+      background: var(--cream);
+      overflow: hidden;
+      box-shadow: 14px 14px 0 var(--line);
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 22% 18%, rgba(240,90,40,.18), transparent 22%),
+        radial-gradient(circle at 86% 70%, rgba(0,167,181,.16), transparent 24%),
+        linear-gradient(135deg, transparent 0 46%, rgba(23,20,18,.08) 46% 47%, transparent 47% 100%);
+    }
+
+    .visual-label {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 3;
+      background: var(--line);
+      color: var(--cream);
+      padding: 10px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .plane-stack {
+      position: absolute;
+      inset: 96px 34px 160px;
+      display: grid;
+      align-content: center;
+      gap: 22px;
+      z-index: 2;
+    }
+
+    .plane {
+      --c: var(--orange);
+      position: relative;
+      height: 48px;
+      transform: rotate(-8deg);
+      filter: drop-shadow(8px 12px 0 rgba(23,20,18,.16));
+    }
+
+    .plane:nth-child(2) { --c: var(--yellow); margin-left: 30px; transform: rotate(-5deg); }
+    .plane:nth-child(3) { --c: var(--turquoise); margin-left: 64px; transform: rotate(-2deg); }
+    .plane:nth-child(4) { --c: var(--blue); margin-left: 26px; transform: rotate(2deg); }
+    .plane:nth-child(5) { --c: var(--ochre); margin-left: 88px; transform: rotate(5deg); }
+    .plane:nth-child(6) { --c: var(--beige); margin-left: 48px; transform: rotate(8deg); }
+
+    .fuselage {
+      position: absolute;
+      left: 8px;
+      right: 36px;
+      top: 14px;
+      height: 20px;
+      background: var(--c);
+      border: 2px solid var(--line);
+      border-radius: 30px 60px 60px 30px;
+    }
+
+    .nose {
+      position: absolute;
+      right: 12px;
+      top: 14px;
+      width: 46px;
+      height: 20px;
+      background: var(--line);
+      border-radius: 0 80px 80px 0;
+    }
+
+    .wing {
+      position: absolute;
+      left: 42%;
+      top: 27px;
+      width: 110px;
+      height: 18px;
+      background: var(--cream);
+      border: 2px solid var(--line);
+      transform: skewX(-32deg);
+    }
+
+    .tail {
+      position: absolute;
+      left: 22px;
+      top: 0;
+      width: 42px;
+      height: 24px;
+      background: var(--cream);
+      border: 2px solid var(--line);
+      transform: skewX(24deg);
+    }
+
+    .system-strip {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      border-top: 3px solid var(--line);
+      z-index: 3;
+    }
+
+    .system-strip div {
+      min-height: 128px;
+      padding: 12px;
+      border-right: 2px solid var(--line);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .system-strip div:nth-child(1) { background: var(--orange); color: var(--cream); }
+    .system-strip div:nth-child(2) { background: var(--yellow); }
+    .system-strip div:nth-child(3) { background: var(--turquoise); color: var(--cream); }
+    .system-strip div:nth-child(4) { background: var(--blue); color: var(--cream); }
+    .system-strip div:nth-child(5) { background: var(--ochre); }
+    .system-strip div:nth-child(6) { background: var(--beige); border-right: 0; }
+
+    section {
+      padding: 70px 0;
+      border-bottom: 2px solid rgba(23,20,18,.24);
+    }
+
+    .visual-archive {
+      display: grid;
+      grid-template-columns: 1.45fr .55fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .image-card {
+      margin: 0;
+      border: 3px solid var(--line);
+      background: var(--cream);
+      overflow: hidden;
+      box-shadow: 8px 8px 0 var(--line);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .image-card.large {
+      grid-row: span 2;
+    }
+
+    .image-card img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.12) contrast(1.04);
+    }
+
+    .image-card.large img {
+      height: 740px;
+    }
+
+    .image-card.poster img,
+    .image-card.document img {
+      object-fit: contain;
+      background: #eee5d6;
+      padding: 10px;
+    }
+
+    .caption {
+      position: static;
+      z-index: auto;
+      padding: 13px 14px 15px;
+      color: var(--ink);
+      border-top: 3px solid var(--line);
+      background: var(--cream);
+    }
+
+    .caption b {
+      display: block;
+      font-size: clamp(18px, 1.8vw, 28px);
+      line-height: .98;
+      letter-spacing: -.045em;
+      text-transform: uppercase;
+      max-width: 760px;
+    }
+
+    .caption span {
+      display: block;
+      max-width: 760px;
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .archive-grid .image-card {
+      box-shadow: 6px 6px 0 var(--line);
+    }
+
+    .archive-grid .image-card img {
+      height: 390px;
+    }
+
+    .archive-grid .image-card.wide {
+      grid-column: span 2;
+    }
+
+    .archive-grid .image-card.wide img {
+      height: 560px;
+    }
+
+    .visual-warning {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .story-board {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .story-lead {
+      border: 3px solid var(--line);
+      background: var(--ink);
+      color: var(--cream);
+      padding: 28px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 10px 10px 0 var(--line);
+    }
+
+    .story-lead h3 {
+      margin: 0;
+      font-size: clamp(42px, 6vw, 88px);
+      line-height: .86;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+    }
+
+    .story-lead p {
+      margin: 28px 0 0;
+      font-size: clamp(21px, 2vw, 31px);
+      line-height: 1.08;
+      font-weight: 900;
+      color: rgba(255,249,238,.86);
+    }
+
+    .story-lead em {
+      color: var(--yellow);
+      font-style: normal;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .story-card {
+      border: 3px solid var(--line);
+      background: var(--cream);
+      padding: 18px;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 6px 6px 0 var(--line);
+    }
+
+    .story-card:nth-child(2) { background: #ffe4c0; }
+    .story-card:nth-child(3) { background: #d9f3f4; }
+    .story-card:nth-child(4) { background: #f6d66d; }
+
+    .story-kicker {
+      display: inline-flex;
+      width: fit-content;
+      border: 2px solid var(--line);
+      padding: 5px 8px;
+      background: var(--orange);
+      color: var(--cream);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .story-card h3 {
+      margin: 18px 0 10px;
+      font-size: clamp(25px, 2.8vw, 42px);
+      line-height: .9;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+    }
+
+    .story-card p {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .story-proof {
+      margin-top: 18px;
+      border-top: 2px solid var(--line);
+      padding-top: 10px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted);
+    }
+
+    .chain {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border: 3px solid var(--line);
+      background: var(--cream);
+      box-shadow: 10px 10px 0 var(--line);
+    }
+
+    .chain-step {
+      min-height: 260px;
+      padding: 18px;
+      border-right: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .chain-step:last-child {
+      border-right: 0;
+    }
+
+    .chain-step:nth-child(1) { background: var(--orange); color: var(--cream); }
+    .chain-step:nth-child(2) { background: var(--yellow); }
+    .chain-step:nth-child(3) { background: var(--turquoise); color: var(--cream); }
+    .chain-step:nth-child(4) { background: var(--blue); color: var(--cream); }
+    .chain-step:nth-child(5) { background: var(--beige); }
+
+    .chain-step small {
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      opacity: .8;
+    }
+
+    .chain-step b {
+      display: block;
+      margin-top: 18px;
+      font-size: clamp(23px, 2.7vw, 38px);
+      line-height: .9;
+      letter-spacing: -.045em;
+      text-transform: uppercase;
+    }
+
+    .chain-step p {
+      margin: 20px 0 0;
+      font-size: 15px;
+      line-height: 1.22;
+      font-weight: 800;
+    }
+
+    .chain-note {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 18px;
+    }
+
+    .chain-note blockquote {
+      margin: 0;
+      border: 3px solid var(--line);
+      background: var(--ink);
+      color: var(--cream);
+      padding: 24px;
+      font-size: clamp(28px, 4vw, 54px);
+      line-height: .9;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+      font-weight: 900;
+      box-shadow: 8px 8px 0 var(--line);
+    }
+
+    .chain-note p {
+      margin: 0;
+      border: 3px solid var(--line);
+      background: var(--cream);
+      padding: 24px;
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.12;
+      font-weight: 850;
+      color: var(--muted);
+    }
+
+    .duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .duo-card {
+      border: 3px solid var(--line);
+      background: var(--cream);
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 8px 8px 0 var(--line);
+    }
+
+    .duo-card:first-child {
+      background: var(--orange);
+      color: var(--cream);
+    }
+
+    .duo-card:last-child {
+      background: var(--turquoise);
+      color: var(--cream);
+    }
+
+    .duo-card header {
+      border-bottom: 3px solid var(--line);
+      padding: 22px;
+      margin: 0;
+    }
+
+    .duo-card h3 {
+      margin: 0;
+      font-size: clamp(44px, 6vw, 84px);
+      line-height: .84;
+      letter-spacing: -.065em;
+      text-transform: uppercase;
+    }
+
+    .duo-card .role {
+      display: block;
+      margin-bottom: 14px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .duo-body {
+      padding: 22px;
+    }
+
+    .duo-body p {
+      margin: 0 0 16px;
+      font-size: 19px;
+      line-height: 1.16;
+      font-weight: 850;
+    }
+
+    .duo-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-system {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .big-number {
+      border: 3px solid var(--line);
+      background: var(--yellow);
+      padding: 24px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 10px 10px 0 var(--line);
+    }
+
+    .big-number b {
+      display: block;
+      font-size: clamp(76px, 11vw, 154px);
+      line-height: .78;
+      letter-spacing: -.08em;
+    }
+
+    .big-number span {
+      display: block;
+      margin-top: 16px;
+      font-size: clamp(26px, 3vw, 46px);
+      line-height: .92;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .big-number p {
+      margin: 24px 0 0;
+      font-size: 18px;
+      line-height: 1.18;
+      font-weight: 850;
+      color: #4c3b14;
+    }
+
+    .object-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 3px solid var(--line);
+      background: var(--cream);
+      box-shadow: 8px 8px 0 var(--line);
+    }
+
+    .object-list div {
+      min-height: 130px;
+      padding: 14px;
+      border-right: 2px solid var(--line);
+      border-bottom: 2px solid var(--line);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .object-list div:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .object-list div:nth-last-child(-n+3) {
+      border-bottom: 0;
+    }
+
+    .object-list div:nth-child(4n+1) { background: #ffe4c0; }
+    .object-list div:nth-child(4n+2) { background: #d9f3f4; }
+    .object-list div:nth-child(4n+3) { background: #f6d66d; }
+    .object-list div:nth-child(4n+4) { background: #f6c7b8; }
+
+    .now-frame {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .now-poster {
+      border: 3px solid var(--line);
+      background:
+        repeating-linear-gradient(90deg, #ffffff 0 30px, #f2f2f2 30px 60px),
+        var(--cream);
+      min-height: 520px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 10px 10px 0 var(--line);
+    }
+
+    .now-poster h3 {
+      margin: 0;
+      font-size: clamp(50px, 7vw, 100px);
+      line-height: .82;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+    }
+
+    .now-poster p {
+      margin: 22px 0 0;
+      max-width: 560px;
+      font-size: 20px;
+      font-weight: 850;
+      color: var(--muted);
+    }
+
+    .now-cards {
+      display: grid;
+      gap: 18px;
+    }
+
+    .now-card {
+      border: 3px solid var(--line);
+      background: var(--cream);
+      padding: 20px;
+      box-shadow: 6px 6px 0 var(--line);
+    }
+
+    .now-card h3 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 3vw, 48px);
+      line-height: .9;
+      letter-spacing: -.05em;
+      text-transform: uppercase;
+    }
+
+    .now-card p {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    .complexity {
+      margin-top: 18px;
+      border: 3px solid var(--line);
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      box-shadow: 8px 8px 0 var(--line);
+    }
+
+    .complexity h3 {
+      margin: 0;
+      padding: 24px;
+      border-right: 3px solid var(--line);
+      background: var(--red);
+      color: var(--cream);
+      font-size: clamp(34px, 5vw, 72px);
+      line-height: .88;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+    }
+
+    .complexity div {
+      padding: 24px;
+    }
+
+    .complexity p {
+      margin: 0 0 14px;
+      font-size: 20px;
+      line-height: 1.18;
+      font-weight: 850;
+      color: var(--muted);
+    }
+
+    .complexity p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: .7fr 1.3fr;
+      gap: 32px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 72px);
+      line-height: .9;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(19px, 2vw, 27px);
+      line-height: 1.18;
+      font-weight: 800;
+    }
+
+    .touchpoints {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 3px solid var(--line);
+      background: var(--cream);
+    }
+
+    .touch {
+      min-height: 250px;
+      padding: 18px;
+      border-right: 2px solid var(--line);
+      border-bottom: 2px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .touch:nth-child(4n) {
+      border-right: 0;
+    }
+
+    .touch:nth-last-child(-n+4) {
+      border-bottom: 0;
+    }
+
+    .touch h3 {
+      margin: 0 0 10px;
+      position: relative;
+      z-index: 2;
+      font-size: 28px;
+      line-height: .94;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+    }
+
+    .touch p {
+      position: relative;
+      z-index: 2;
+      margin: 0;
+      color: var(--muted);
+      font-weight: 700;
+      max-width: 270px;
+    }
+
+    .touch .icon {
+      position: absolute;
+      right: 14px;
+      bottom: 10px;
+      font-size: 120px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -.12em;
+      opacity: .18;
+    }
+
+    .touch.aircraft { background: linear-gradient(135deg, var(--orange) 0 50%, var(--cream) 50%); }
+    .touch.interiors { background: repeating-linear-gradient(90deg, var(--yellow) 0 24px, var(--cream) 24px 48px); }
+    .touch.uniforms { background: linear-gradient(160deg, var(--turquoise), var(--cream) 58%); }
+    .touch.ground { background: radial-gradient(circle at 74% 70%, var(--blue) 0 70px, transparent 72px), var(--cream); }
+    .touch.paper { background: linear-gradient(90deg, var(--cream) 0 68%, var(--ochre) 68%); }
+    .touch.ads { background: linear-gradient(0deg, var(--line) 0 25%, var(--cream) 25%); }
+    .touch.art { background: conic-gradient(from 25deg, var(--red), var(--yellow), var(--blue), var(--cream), var(--red)); }
+    .touch.luxury { background: linear-gradient(135deg, #2a241f, #8d6b43); color: var(--cream); }
+    .touch.luxury p { color: rgba(255,249,238,.78); }
+
+    .timeline-layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .timeline-nav {
+      position: sticky;
+      top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .time-btn {
+      width: 100%;
+      cursor: pointer;
+      text-align: left;
+      border: 2px solid var(--line);
+      background: var(--cream);
+      color: var(--ink);
+      padding: 14px 16px;
+      font: inherit;
+      font-weight: 900;
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 14px;
+      align-items: center;
+      box-shadow: 5px 5px 0 transparent;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    .time-btn:hover,
+    .time-btn.active {
+      transform: translate(-3px, -3px);
+      box-shadow: 5px 5px 0 var(--line);
+      background: var(--yellow);
+    }
+
+    .year {
+      font-size: 24px;
+      letter-spacing: -.04em;
+    }
+
+    .event-title {
+      font-size: 14px;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .timeline-stage {
+      min-height: 620px;
+      border: 3px solid var(--line);
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      box-shadow: 12px 12px 0 var(--line);
+    }
+
+    .stage-visual {
+      position: relative;
+      min-height: 620px;
+      border-right: 3px solid var(--line);
+      background: var(--stage, var(--orange));
+      overflow: hidden;
+    }
+
+    .stage-visual::before {
+      content: attr(data-year);
+      position: absolute;
+      left: -22px;
+      bottom: -34px;
+      font-size: 164px;
+      font-weight: 900;
+      line-height: .8;
+      letter-spacing: -.09em;
+      color: rgba(255,249,238,.42);
+    }
+
+    .stage-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0 44%, rgba(23,20,18,.22) 44% 47%, transparent 47%),
+        radial-gradient(circle at 78% 20%, rgba(255,249,238,.45), transparent 18%);
+    }
+
+    .stage-mark {
+      position: absolute;
+      inset: 72px 32px;
+      border: 3px solid var(--line);
+      background: rgba(255,249,238,.8);
+      display: grid;
+      place-items: center;
+      z-index: 2;
+    }
+
+    .stage-mark svg {
+      width: 86%;
+      height: 86%;
+    }
+
+    .stage-copy {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stage-copy h3 {
+      margin: 0;
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: .9;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+    }
+
+    .stage-copy p {
+      font-size: 20px;
+      font-weight: 750;
+      color: var(--muted);
+    }
+
+    .stage-note {
+      padding-top: 22px;
+      border-top: 2px solid var(--line);
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      border: 3px solid var(--line);
+      background: var(--cream);
+    }
+
+    .step {
+      min-height: 220px;
+      padding: 16px;
+      border-right: 2px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .step:last-child {
+      border-right: 0;
+    }
+
+    .step-num {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--line);
+      color: var(--cream);
+      font-weight: 900;
+    }
+
+    .step h3 {
+      margin: 0;
+      font-size: 24px;
+      line-height: .94;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .credits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .credit {
+      border: 2px solid var(--line);
+      background: var(--cream);
+      padding: 18px;
+      min-height: 170px;
+    }
+
+    .credit b {
+      display: block;
+      font-size: 24px;
+      line-height: .95;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .credit span {
+      display: block;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .credit p {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .sources {
+      margin-top: 28px;
+      border: 2px solid var(--line);
+      background: var(--ink);
+      color: var(--cream);
+      padding: 18px;
+    }
+
+    .sources h3 {
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: 14px;
+    }
+
+    .sources ul {
+      margin: 0;
+      padding-left: 20px;
+      columns: 2;
+      column-gap: 36px;
+    }
+
+    .sources li {
+      break-inside: avoid;
+      margin-bottom: 8px;
+      color: rgba(255,249,238,.82);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .sources a {
+      color: var(--cream);
+    }
+
+    .closing {
+      padding: 72px 0 90px;
+    }
+
+    .closing blockquote {
+      margin: 0;
+      padding: 0;
+      font-size: clamp(36px, 6vw, 88px);
+      line-height: .9;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+      font-weight: 900;
+      max-width: 1060px;
+    }
+
+    .closing p {
+      max-width: 780px;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .section-head,
+      .timeline-layout,
+      .timeline-stage,
+      .story-board,
+      .chain-note,
+      .duo,
+      .detail-system,
+      .now-frame,
+      .complexity {
+        grid-template-columns: 1fr;
+      }
+
+      .complexity h3 {
+        border-right: 0;
+        border-bottom: 3px solid var(--line);
+      }
+
+      .chain {
+        grid-template-columns: 1fr;
+      }
+
+      .chain-step {
+        border-right: 0;
+        border-bottom: 2px solid var(--line);
+      }
+
+      .chain-step:last-child {
+        border-bottom: 0;
+      }
+
+      .object-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .object-list div,
+      .object-list div:nth-child(3n),
+      .object-list div:nth-last-child(-n+3) {
+        border-right: 2px solid var(--line);
+        border-bottom: 2px solid var(--line);
+      }
+
+      .object-list div:nth-child(2n) {
+        border-right: 0;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-visual,
+      .stage-visual,
+      .timeline-stage {
+        min-height: 520px;
+      }
+
+      .timeline-nav {
+        position: static;
+      }
+
+      .touchpoints,
+      .credits,
+      .visual-archive {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .journey {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: min(100% - 22px, 1240px);
+      }
+
+      .stats,
+      .touchpoints,
+      .credits,
+      .journey,
+      .visual-archive,
+      .archive-grid,
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .image-card.large {
+        min-height: 470px;
+      }
+
+      .touch,
+      .touch:nth-child(4n),
+      .touch:nth-last-child(-n+4),
+      .step {
+        border-right: 0;
+        border-bottom: 2px solid var(--line);
+      }
+
+      .touch:last-child,
+      .step:last-child {
+        border-bottom: 0;
+      }
+
+      .hero-visual {
+        min-height: 560px;
+        box-shadow: 7px 7px 0 var(--line);
+      }
+
+      .system-strip {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .system-strip div {
+        min-height: 84px;
+      }
+
+      .plane-stack {
+        inset: 88px 16px 186px;
+      }
+
+      .sources ul {
+        columns: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow"><span class="dot"></span><span>Braniff International / 1965-1982</span></div>
+        <h1>How Braniff Sold the Future</h1>
+        <p class="hero-copy">Braniff did not just repaint airplanes. It sold a radical idea: that an airline could become a <span>complete designed world</span>, from the aircraft skin to the ticket jacket to the person handing you a drink.</p>
+        <div class="stats" aria-label="Key facts">
+          <div class="stat"><b>17,000+</b><small>Design changes attributed to Girard's overhaul</small></div>
+          <div class="stat"><b>7</b><small>Original exterior aircraft colors</small></div>
+          <div class="stat"><b>1</b><small>Passenger journey treated as a system</small></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Stylized Braniff aircraft color system">
+        <div class="visual-label">The End of the Plain Plane</div>
+        <div class="plane-stack">
+          <div class="plane"><span class="tail"></span><span class="fuselage"></span><span class="wing"></span><span class="nose"></span></div>
+          <div class="plane"><span class="tail"></span><span class="fuselage"></span><span class="wing"></span><span class="nose"></span></div>
+          <div class="plane"><span class="tail"></span><span class="fuselage"></span><span class="wing"></span><span class="nose"></span></div>
+          <div class="plane"><span class="tail"></span><span class="fuselage"></span><span class="wing"></span><span class="nose"></span></div>
+          <div class="plane"><span class="tail"></span><span class="fuselage"></span><span class="wing"></span><span class="nose"></span></div>
+          <div class="plane"><span class="tail"></span><span class="fuselage"></span><span class="wing"></span><span class="nose"></span></div>
+        </div>
+        <div class="system-strip">
+          <div>Aircraft</div>
+          <div>Cabins</div>
+          <div>Crew</div>
+          <div>Ground</div>
+          <div>Paper</div>
+          <div>Ads</div>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="section-head">
+        <h2>Why This Story Matters Now</h2>
+        <p>Airlines are drifting back toward sameness: similar boarding systems, similar service cues, similar white aircraft, similar promises. Braniff matters because it shows the opposite instinct.</p>
+      </div>
+
+      <div class="now-frame">
+        <article class="now-poster">
+          <div>
+            <div class="eyebrow"><span class="dot"></span><span>Then / Now</span></div>
+            <h3>Same Sky. Same Seats. Same Brand?</h3>
+          </div>
+          <p>Before Braniff, liveries were mostly treated as practical markers of trust and professionalism. Today, many airlines again look cautious, white, optimized, and interchangeable.</p>
+        </article>
+
+        <div class="now-cards">
+          <article class="now-card">
+            <h3>Braniff Treated the Plane as Media</h3>
+            <p>The aircraft was not just transportation hardware. It became the largest, most visible brand surface the company owned.</p>
+          </article>
+          <article class="now-card">
+            <h3>The Whole Fleet Became a Game</h3>
+            <p>Different aircraft colors created anticipation: which Braniff would you get this time? The design made repeat travel feel less routine.</p>
+          </article>
+          <article class="now-card">
+            <h3>The Legacy Still Shows Up</h3>
+            <p>Modern special liveries and fleet-wide experiments, like Condor's striped leisure-airline identity, echo the same lesson: visibility is strategy when everyone else blends in.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>The Visual Evidence</h2>
+        <p>This story needs to be seen before it is explained: aircraft skins, cabin color, crew uniforms, airport environments, printed matter, small objects, textiles, and later flying art.</p>
+      </div>
+
+      <div class="visual-archive">
+        <figure class="image-card large">
+          <img src="https://www.thehenryford.org/images/thehenryfordlibraries/blog-images/thf275594.jpg?sfvrsn=57c734a5_0" alt="Braniff airliner in orange Jelly Bean livery designed by Alexander Girard, circa 1965." />
+          <figcaption class="caption">
+            <b>The airplane became the biggest brand object.</b>
+            <span>Alexander Girard orange livery, circa 1965. Image: The Henry Ford / THF275594.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card poster">
+          <img src="https://www.airlinereporter.com/wp-content/uploads/2013/05/1965-end-of-the-plain-plane-ad-campaign_216-500x337.jpg" alt="1965 End of the Plain Plane advertising campaign for Braniff." />
+          <figcaption class="caption">
+            <b>The campaign gave the system a name.</b>
+            <span>1965 End of the Plain Plane ad campaign. Image: Chris Sloan / Airchive via AirlineReporter.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card">
+          <img src="https://images.squarespace-cdn.com/content/v1/572fa7687c65e4a1135b4bb6/1604106709844-CTE5YZETHS2WK3UQRX7Y/BI%2B747-127%2BN601BN%2BFirst%2BClass%2BBlue%2BSuite%2B1971.jpg" alt="Braniff 747 first class blue suite interior from 1971." />
+          <figcaption class="caption">
+            <b>The cabin carried the world inside.</b>
+            <span>747 First Class Blue Suite, 1971. Image: Braniff International archive.</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="archive-grid">
+        <figure class="image-card wide">
+          <img src="https://images.squarespace-cdn.com/content/v1/572fa7687c65e4a1135b4bb6/1604106707646-1QIVSEA45PAXCOMZCBSD/BI%2B720-027%2BN7076%2BEOTPP%2BPeriwinkle%2BBlue%2BLavender%2B7701%2BDAL%2B1965.jpg" alt="Braniff aircraft in periwinkle blue lavender End of the Plain Plane livery at Dallas Love Field in 1965." />
+          <figcaption class="caption">
+            <b>Not one hero plane. A whole fleet language.</b>
+            <span>End of the Plain Plane livery. Image: Braniff International archive.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card document">
+          <img src="https://sites.northwestern.edu/northwesternlibrary/files/2016/08/Braniff-1967-Timetable-2028nkq-134x300.jpg" alt="Braniff 1967 timetable showing Alexander Girard's type and graphic system." />
+          <figcaption class="caption">
+            <b>The type system traveled onto timetables.</b>
+            <span>1967 timetable. Image: Northwestern University Transportation Library.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card document">
+          <img src="https://sites.northwestern.edu/northwesternlibrary/files/2016/08/1965-Annual-Report-1fuzg28-e1471536431390-1024x724.jpg" alt="Braniff 1965 annual report using the new visual identity." />
+          <figcaption class="caption">
+            <b>Corporate reporting became part of the identity.</b>
+            <span>1965 annual report. Image: Northwestern University Transportation Library.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card document">
+          <img src="https://sites.northwestern.edu/northwesternlibrary/files/2016/08/Braniff-1971-1bxcp3d-e1471536467318-224x300.jpg" alt="Braniff 1971 annual report showing End of the Plain Plane visual material." />
+          <figcaption class="caption">
+            <b>The visual language kept extending.</b>
+            <span>1971 annual report. Image: Northwestern University Transportation Library.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card">
+          <img src="https://images.squarespace-cdn.com/content/v1/572fa7687c65e4a1135b4bb6/1604106707728-9FXJZF92RCWZ2A1FJD5O/BI%2B727%2B1972%2BPucci%2BBlue%2BCollection%2BHostess%2BUniforms%2BUmbrellas%2BDAL%2B1972.jpg" alt="Braniff Pucci Blue Collection hostess uniforms with umbrellas at Dallas Love Field in 1972." />
+          <figcaption class="caption">
+            <b>The crew became moving identity.</b>
+            <span>Pucci Blue Collection, 1972. Image: Braniff International archive.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card">
+          <img src="https://images.squarespace-cdn.com/content/v1/572fa7687c65e4a1135b4bb6/1604106711917-FJQLMRASYS7U47JARB7G/BI%2BBAF-Uniform%2BProof%2B300dpi%2Bcopy.jpg" alt="Braniff uniform proof showing the airline's fashion system and Pucci-era visual identity." />
+          <figcaption class="caption">
+            <b>Uniforms were not wardrobe. They were brand media.</b>
+            <span>Braniff uniform proof. Image: Braniff International archive.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card document">
+          <img src="https://www.domusweb.it/content/dam/domusweb/it/from-the-archive/2023/07/24/gli-aerei-colorati-disegnati-da-girard-colorati-disegni-da-girard-per-la-braniff-international/domus-aeroplani%20%283%29.png.foto.rmedium.png" alt="Domus archive page showing Braniff passenger lounge and design system." />
+          <figcaption class="caption">
+            <b>The lounges made the flight begin before boarding.</b>
+            <span>Domus 443, October 1966 archive scan. Image: Domus.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card wide">
+          <img src="https://sites.northwestern.edu/northwesternlibrary/files/2016/08/Interior-1a1m37r-1024x465.jpg" alt="Braniff aircraft interior showing Girard-designed fabrics, seats, and cabin colors." />
+          <figcaption class="caption">
+            <b>The inside of the aircraft carried the same color logic.</b>
+            <span>Braniff interior. Image: Northwestern University Transportation Library.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card">
+          <img src="https://www.thehenryford.org/images/thehenryfordlibraries/blog-images/thf175414_thf172360.jpg?sfvrsn=d0f7ee58_0" alt="Braniff playing cards and bar soap showing small designed artifacts." />
+          <figcaption class="caption">
+            <b>Even the small objects were designed.</b>
+            <span>Playing cards and bar soap. Image: The Henry Ford.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card">
+          <img src="https://www.thehenryford.org/images/thehenryfordlibraries/blog-images/girard_textiles.jpg?sfvrsn=7b6622cf_0" alt="Undigitized textile samples by Alexander Girard for Braniff International Airways." />
+          <figcaption class="caption">
+            <b>Textiles made the system tactile.</b>
+            <span>Girard textile samples. Image: The Henry Ford.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card document">
+          <img src="https://sites.northwestern.edu/northwesternlibrary/files/2016/08/Space-Bubble-2gdhhjv-248x300.jpg" alt="Braniff space bubble helmet from Emilio Pucci's Gemini 4 uniform program." />
+          <figcaption class="caption">
+            <b>The space bubble made the future wearable.</b>
+            <span>Pucci space bubble helmet. Image: Northwestern University Transportation Library.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card document">
+          <img src="https://sites.northwestern.edu/northwesternlibrary/files/2016/08/Jet-Engine-16qymkk-300x300.jpg" alt="Braniff jet engine detail showing graphic application on aircraft hardware." />
+          <figcaption class="caption">
+            <b>Even the hardware got pulled into the system.</b>
+            <span>Jet engine graphic detail. Image: Northwestern University Transportation Library.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card wide">
+          <img src="https://images.squarespace-cdn.com/content/v1/572fa7687c65e4a1135b4bb6/1604106710970-Z25PRYZ0FJFA09OIRRP6/BI%2BDC-8-62%2BN1805%2BCalder%2BUnveiling%2BFlyby%2BDFW%2BOct%2B29%2B1973%2B73-574-4.jpg" alt="Braniff DC-8-62 N1805 with Alexander Calder Flying Colors livery during the 1973 unveiling flyby." />
+          <figcaption class="caption">
+            <b>Calder turned the aircraft into art.</b>
+            <span>DC-8-62 N1805 Calder unveiling flyby, DFW, October 29, 1973. Image: Braniff International archive.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="image-card">
+          <img src="https://images.squarespace-cdn.com/content/v1/572fa7687c65e4a1135b4bb6/1604106712202-VG01DFJRWXFEDQTV0T90/BI%2BFirst%2BClass%2BUltra%2BSpace%2BSeats%2BHalston%2Band%2BHalstonettes%2BDFW%2B1977.jpg" alt="Braniff First Class Ultra Space seats with Halston and Halstonettes at Dallas Fort Worth in 1977." />
+          <figcaption class="caption">
+            <b>Halston reset the language to luxury.</b>
+            <span>Ultra Look, 1977. Image: Braniff International archive.</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <p class="visual-warning">Note: these archival images are loaded from credited museum, Smithsonian, and Braniff archive URLs. If viewed offline, the page structure remains, but the photographs need a connection.</p>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>How They Sold the Unsellable</h2>
+        <p>The radical design was not sold as decoration. It was sold as escape from anonymity: a way to make a mid-tier airline impossible to ignore.</p>
+      </div>
+
+      <div class="story-board">
+        <article class="story-lead">
+          <div>
+            <div class="eyebrow"><span class="dot"></span><span>The Origin Story</span></div>
+            <h3>It Started With Disgust</h3>
+          </div>
+          <p>Mary Wells walked Braniff's terminals and saw institutional gray: military habits, hidden lounges, bad signs, nurse-like uniforms, nowhere for the eye to rest. Her conclusion was brutal: <em>there was no color.</em></p>
+        </article>
+
+        <div class="story-grid">
+          <article class="story-card">
+            <div>
+              <span class="story-kicker">The Brief</span>
+              <h3>Make Us News</h3>
+              <p>Troy Post wanted a big idea that could put Braniff into the spotlight quickly. This was not a polish-the-logo assignment. It was a fame problem.</p>
+            </div>
+            <div class="story-proof">Strategic translation: if you cannot out-speed the market, out-remember it.</div>
+          </article>
+
+          <article class="story-card">
+            <div>
+              <span class="story-kicker">The Cast</span>
+              <h3>Use Outsiders</h3>
+              <p>Wells built a team from outside aviation: Alexander Girard for total design, Emilio Pucci for fashion, Beth Levine for shoes, later Calder for art and Halston for luxury.</p>
+            </div>
+            <div class="story-proof">The risk looked bigger, but the names gave it cultural authority.</div>
+          </article>
+
+          <article class="story-card">
+            <div>
+              <span class="story-kicker">The Fight</span>
+              <h3>Radical, Then Negotiated</h3>
+              <p>Girard wanted cleaner, bolder planes with smaller marks. Braniff engineering and advertising modified the idea: bigger BI logo, white wings, white tails.</p>
+            </div>
+            <div class="story-proof">The system had to survive operations, visibility, and internal nerves.</div>
+          </article>
+
+          <article class="story-card">
+            <div>
+              <span class="story-kicker">The Proof</span>
+              <h3>The Industry Laughed First</h3>
+              <p>Other airlines reportedly complained that the paint made the planes heavy. The joke aged badly. Painted fleets became normal.</p>
+            </div>
+            <div class="story-proof">That is how radical ideas often travel: ridicule, attention, imitation.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>The Creative Chain</h2>
+        <p>The Braniff overhaul did not begin as a normal design commission. It came through Jack Tinker & Partners, a creative think tank whose people were known as "Tinker's Thinkers."</p>
+      </div>
+
+      <div class="chain">
+        <div class="chain-step">
+          <div>
+            <small>Client Ambition</small>
+            <b>Braniff Needed Attention</b>
+          </div>
+          <p>Harding Lawrence and Braniff leadership wanted to reintroduce the airline and make it feel modern, memorable, and impossible to miss.</p>
+        </div>
+        <div class="chain-step">
+          <div>
+            <small>Agency Container</small>
+            <b>Jack Tinker & Partners</b>
+          </div>
+          <p>The assignment went to Tinker's unusual creative group inside Interpublic, built to generate breakthrough campaign ideas rather than routine advertising.</p>
+        </div>
+        <div class="chain-step">
+          <div>
+            <small>Creative Driver</small>
+            <b>Mary Wells</b>
+          </div>
+          <p>Wells led the creative response. She diagnosed the dullness of air travel, named the revolution, and hired the outside talent to make the airline itself newsworthy.</p>
+        </div>
+        <div class="chain-step">
+          <div>
+            <small>Project Designer</small>
+            <b>Alexander Girard</b>
+          </div>
+          <p>Girard turned the idea into a complete operating world: planes, interiors, lounges, furniture, graphics, type, textiles, paper, and thousands of details.</p>
+        </div>
+        <div class="chain-step">
+          <div>
+            <small>Fashion System</small>
+            <b>Emilio Pucci</b>
+          </div>
+          <p>Pucci made the people inside the system visible, with uniforms that brought space-age fashion, color, and performance into the cabin.</p>
+        </div>
+      </div>
+
+      <div class="chain-note">
+        <blockquote>Wells was not just selling ads. She was casting a transformation.</blockquote>
+        <p>That is what makes the authorship interesting. Wells was the creative director of the leap. Girard was the designer of the world. Pucci made the people inside that world unforgettable. Braniff was no longer buying ads about an airline. It was redesigning the airline so the ads had something explosive to announce.</p>
+      </div>
+
+      <div class="complexity">
+        <h3>The Complicated Part</h3>
+        <div>
+          <p>Braniff's fashion strategy also exposes the gender politics of the era. The Pucci uniforms and "Air Strip" campaign made flight attendants central to the spectacle, but they did so through a male business-traveler gaze.</p>
+          <p>That does not erase the creative achievement. It makes the story more honest: Wells was a pioneering woman in advertising, and she also operated inside a market where sexism could be converted into salesmanship.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Two Different Kinds of Creative</h2>
+        <p>Mary Wells and Alexander Girard were not doing the same job. The power of Braniff came from the handoff between advertising imagination and total-environment design.</p>
+      </div>
+
+      <div class="duo">
+        <article class="duo-card">
+          <header>
+            <span class="role">Mary Wells / Creative Force</span>
+            <h3>The Dramatic Mind</h3>
+          </header>
+          <div class="duo-body">
+            <p>Wells saw the airline category as emotionally dead: gray terminals, conservative planes, hidden clubs, dull signs, uniforms that carried military and nursing associations.</p>
+            <p>Her creative act was not simply writing a line. It was reframing the whole business problem as a public event: the end of sameness, the end of gray, the end of the plain plane.</p>
+            <p>She cast the transformation by bringing in outsiders with cultural authority: Girard for the designed world, Pucci for fashion, Levine for footwear, and later Calder and Halston as the system evolved.</p>
+          </div>
+        </article>
+
+        <article class="duo-card">
+          <header>
+            <span class="role">Alexander Girard / Project Designer</span>
+            <h3>The World Builder</h3>
+          </header>
+          <div class="duo-body">
+            <p>Girard was an architect, interior designer, textile designer, graphic designer, furniture designer, and collector. He was not there to decorate the planes. He was there to build a complete environment.</p>
+            <p>Before Braniff, he had already designed La Fonda del Sol as a full sensory world: interiors, graphics, place settings, staff uniforms, menus, matchbooks, murals.</p>
+            <p>Braniff gave him the same assignment at aviation scale: make every passenger-facing surface, object, fabric, sign, ticket, and plane feel like part of one system.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>The 17,543-Piece Detail</h2>
+        <p>This is the number that proves Braniff was not running a campaign around design. It was redesigning the operating experience itself.</p>
+      </div>
+
+      <div class="detail-system">
+        <div class="big-number">
+          <div>
+            <b>17,543</b>
+            <span>Designed items and changes</span>
+          </div>
+          <p>The exact number varies slightly by source, but the meaning is consistent: Girard's role reached from aircraft liveries and lounges down to the smallest passenger objects.</p>
+        </div>
+
+        <div class="object-list" aria-label="Examples of Braniff designed elements">
+          <div>Aircraft liveries</div>
+          <div>Cabin palettes</div>
+          <div>Upholstery</div>
+          <div>Blankets</div>
+          <div>Ticket counters</div>
+          <div>Airport lounges</div>
+          <div>Lounge furniture</div>
+          <div>Typeface</div>
+          <div>Logo system</div>
+          <div>Timetables</div>
+          <div>Annual reports</div>
+          <div>Ticket jackets</div>
+          <div>Luggage tags</div>
+          <div>Matchbooks</div>
+          <div>Playing cards</div>
+          <div>Sugar packets</div>
+          <div>Soap packaging</div>
+          <div>Dishware</div>
+          <div>Serving pieces</div>
+          <div>Litter bags</div>
+          <div>Menus</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>The Point Was Completeness</h2>
+        <p>At a moment when airlines were hard to separate by speed alone, Braniff made differentiation physical. The brand was not a logo placed on top of the service. The brand was the service environment itself.</p>
+      </div>
+
+      <div class="touchpoints">
+        <article class="touch aircraft">
+          <h3>Aircraft</h3>
+          <p>Solid fuselage colors replaced conservative industry liveries.</p>
+          <div class="icon">01</div>
+        </article>
+        <article class="touch interiors">
+          <h3>Interiors</h3>
+          <p>Cabin palettes, upholstery, curtains, and textiles became part of the identity.</p>
+          <div class="icon">02</div>
+        </article>
+        <article class="touch uniforms">
+          <h3>Uniforms</h3>
+          <p>Pucci turned crew dress into motion, theater, and recognition.</p>
+          <div class="icon">03</div>
+        </article>
+        <article class="touch ground">
+          <h3>Ground</h3>
+          <p>Lounges and terminals carried the system before passengers boarded.</p>
+          <div class="icon">04</div>
+        </article>
+        <article class="touch paper">
+          <h3>Paper</h3>
+          <p>Tickets, tags, menus, timetables, and small objects stopped being afterthoughts.</p>
+          <div class="icon">05</div>
+        </article>
+        <article class="touch ads">
+          <h3>Advertising</h3>
+          <p>"The End of the Plain Plane" gave the whole system a public story.</p>
+          <div class="icon">06</div>
+        </article>
+        <article class="touch art">
+          <h3>Art</h3>
+          <p>Calder transformed aircraft into flying canvases for South America and the U.S.</p>
+          <div class="icon">07</div>
+        </article>
+        <article class="touch luxury">
+          <h3>Luxury Reset</h3>
+          <p>Halston later moved the identity toward restraint, leather, and the Ultra Look.</p>
+          <div class="icon">08</div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Timeline of a Designed World</h2>
+        <p>The story matters because it builds. First the airline becomes visible. Then every object becomes coordinated. Then the people, spaces, aircraft, and art all become part of one system.</p>
+      </div>
+
+      <div class="timeline-layout">
+        <nav class="timeline-nav" aria-label="Timeline controls">
+          <button class="time-btn active" data-index="0"><span class="year">1964</span><span class="event-title">Mary Wells and Jack Tinker begin the rethink</span></button>
+          <button class="time-btn" data-index="1"><span class="year">1965</span><span class="event-title">The End of the Plain Plane launches</span></button>
+          <button class="time-btn" data-index="2"><span class="year">1965</span><span class="event-title">Girard redesigns the operating world</span></button>
+          <button class="time-btn" data-index="3"><span class="year">1965-67</span><span class="event-title">Pucci turns crew dress into theater</span></button>
+          <button class="time-btn" data-index="4"><span class="year">1973-75</span><span class="event-title">Calder paints the aircraft as art</span></button>
+          <button class="time-btn" data-index="5"><span class="year">1977</span><span class="event-title">Halston brings the Ultra Look</span></button>
+          <button class="time-btn" data-index="6"><span class="year">1982</span><span class="event-title">The business ends, the identity remains</span></button>
+        </nav>
+
+        <div class="timeline-stage">
+          <div class="stage-visual" id="stageVisual" data-year="1964">
+            <div class="stage-mark" id="stageMark"></div>
+          </div>
+          <div class="stage-copy">
+            <div>
+              <h3 id="stageTitle">The Assignment Becomes Total</h3>
+              <p id="stageBody">Braniff brings in Jack Tinker & Partners. Mary Wells, later Mary Wells Lawrence, leads the account and assembles the talent that will make the airline feel unlike anything else in the sky.</p>
+            </div>
+            <div class="stage-note" id="stageNote">Key idea: The problem was not only advertising. It was the whole experience.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>The Passenger Journey</h2>
+        <p>The design did not live in one place. It followed the passenger from the first ad to the ticket counter, the lounge, the aircraft door, the seat, the crew interaction, and the paper artifact taken home.</p>
+      </div>
+
+      <div class="journey">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>See the Ad</h3>
+          <p>The campaign declares that airline sameness is over.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Enter the Terminal</h3>
+          <p>The ground experience carries the color and furniture language.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Hold the Ticket</h3>
+          <p>Printed matter becomes part of the system, not just paperwork.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Board the Plane</h3>
+          <p>The aircraft itself is the largest piece of identity.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <h3>Meet the Crew</h3>
+          <p>Uniforms make service visible, staged, and memorable.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <h3>Remember It</h3>
+          <p>The experience survives because every part told the same story.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Credits: People Behind the System</h2>
+        <p>The Braniff legend was not made by one person. It was a rare collision of airline leadership, advertising nerve, industrial design, fashion, art, and operational detail.</p>
+      </div>
+
+      <div class="credits">
+        <article class="credit">
+          <b>Mary Wells Lawrence</b>
+          <span>Advertising leadership</span>
+          <p>Led the Braniff account at Jack Tinker & Partners and became the central force behind the "End of the Plain Plane" campaign.</p>
+        </article>
+        <article class="credit">
+          <b>Jack Tinker & Partners</b>
+          <span>Agency</span>
+          <p>The advertising firm brought in to rethink Braniff's image and make the airline dramatically more distinctive.</p>
+        </article>
+        <article class="credit">
+          <b>Harding L. Lawrence</b>
+          <span>Braniff leadership</span>
+          <p>Braniff executive leadership behind the airline's aggressive transformation and later expansion era.</p>
+        </article>
+        <article class="credit">
+          <b>Alexander Girard</b>
+          <span>Design system</span>
+          <p>Directed the core design overhaul: aircraft colors, interiors, textiles, graphics, objects, and thousands of touchpoints.</p>
+        </article>
+        <article class="credit">
+          <b>Emilio Pucci</b>
+          <span>Fashion design</span>
+          <p>Created Braniff's famous flight crew uniforms, including the space-age Rain Dome and layered wardrobe concepts.</p>
+        </article>
+        <article class="credit">
+          <b>Beth Levine</b>
+          <span>Footwear design</span>
+          <p>Credited in Braniff histories as part of the fashion team, designing shoes for the uniform program.</p>
+        </article>
+        <article class="credit">
+          <b>Alexander Calder</b>
+          <span>Aircraft art</span>
+          <p>Painted Braniff aircraft as airborne artworks, including Flying Colors and the Bicentennial Flying Colors of the United States.</p>
+        </article>
+        <article class="credit">
+          <b>George Stanley Gordon</b>
+          <span>Calder connection</span>
+          <p>Advertising executive credited with introducing Calder to Braniff leadership and helping bring the aircraft art project to life.</p>
+        </article>
+        <article class="credit">
+          <b>Halston</b>
+          <span>Luxury reset</span>
+          <p>Commissioned in the late 1970s to create the Ultra Look, moving Braniff toward sleek uniforms and leather-accented interiors.</p>
+        </article>
+      </div>
+
+      <div class="sources">
+        <h3>Sources and Reference Credits</h3>
+        <ul>
+          <li><a href="https://www.thehenryford.org/collections/explore/articles/the-end-of-the-plain-plane-campaign">The Henry Ford: "The End of the Plain Plane" Campaign</a></li>
+          <li><a href="https://sites.northwestern.edu/northwesternlibrary/2016/08/23/braniff-and-the-end-of-the-plain-plane/">Northwestern University Libraries: Braniff and the End of the Plain Plane</a></li>
+          <li><a href="https://sites.northwestern.edu/transportationdesign/braniff/">Northwestern Transportation Library: Braniff | On Board With Design</a></li>
+          <li><a href="https://calder.org/works/unusual-project/flying-colors-1973/">Calder Foundation: Flying Colors, 1973</a></li>
+          <li><a href="https://www.smithsonianmag.com/air-space-magazine/the-end-of-the-plain-plane-91607421/">Smithsonian Air & Space: The End of the Plain Plane</a></li>
+          <li><a href="https://www.sfomuseum.org/sites/default/files/Photo%20IDs%20Descriptions%20Credits_0.pdf">SFO Museum: Braniff photo IDs and exhibition credits</a></li>
+          <li><a href="https://www.braniffinternational.com/">Braniff International archive and asset references</a></li>
+          <li><a href="https://www.growtal.com/pinpoint-weekend-edition-the-end-of-the-plain-plane/">GrowTal: summary of Mary Wells Lawrence's Braniff memoir anecdotes</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="closing">
+      <blockquote>Braniff's achievement was not color. It was completeness.</blockquote>
+      <p>That is why the design story survived the business. Every touchpoint pointed in the same direction, until the airline became less like a carrier and more like a world you briefly entered.</p>
+    </footer>
+  </main>
+
+  <script>
+    const events = [
+      {
+        year: "1964",
+        title: "The Assignment Becomes Total",
+        body: "Braniff brings in Jack Tinker & Partners. Mary Wells, later Mary Wells Lawrence, leads the account and assembles the talent that will make the airline feel unlike anything else in the sky.",
+        note: "Key idea: The problem was not only advertising. It was the whole experience.",
+        color: "#f05a28",
+        visual: "brief"
+      },
+      {
+        year: "1965",
+        title: "The End of the Plain Plane",
+        body: "The campaign gives the transformation a public name. The line works because it is blunt, memorable, and true: Braniff is declaring war on airline sameness.",
+        note: "Key idea: The campaign names the system so people can see it.",
+        color: "#f3ba31",
+        visual: "ad"
+      },
+      {
+        year: "1965",
+        title: "Girard Redesigns the Airline",
+        body: "Alexander Girard applies color, textiles, graphics, and object design across the passenger journey. The work is credited with more than 17,000 design changes.",
+        note: "Key idea: A brand becomes powerful when even the small things are intentional.",
+        color: "#00a7b5",
+        visual: "grid"
+      },
+      {
+        year: "1965-67",
+        title: "Pucci Makes Service Visible",
+        body: "Emilio Pucci's uniforms turn crew presence into a moving visual signature, including layered wardrobes and the famous clear Rain Dome helmet.",
+        note: "Key idea: People are part of the design system too.",
+        color: "#1b4f9c",
+        visual: "uniform"
+      },
+      {
+        year: "1973-75",
+        title: "Calder Turns Planes Into Art",
+        body: "Alexander Calder paints Braniff aircraft as airborne works, including Flying Colors and Flying Colors of the United States. The aircraft becomes a gallery in motion.",
+        note: "Key idea: The biggest brand surface was not a billboard. It was the plane.",
+        color: "#d83323",
+        visual: "calder"
+      },
+      {
+        year: "1977",
+        title: "Halston and the Ultra Look",
+        body: "Braniff later shifts toward a more restrained luxury language through Halston's uniforms and interiors, trading pop exuberance for sleek maturity.",
+        note: "Key idea: Even the reset was still total design.",
+        color: "#8d6b43",
+        visual: "luxury"
+      },
+      {
+        year: "1982",
+        title: "The Fleet Is Grounded",
+        body: "Braniff's business collapses, but the design legend outlives the airline. The proof of the system is that people still remember it.",
+        note: "Key idea: The company ended. The identity kept flying.",
+        color: "#171412",
+        visual: "memory"
+      }
+    ];
+
+    const svgs = {
+      brief: `<svg viewBox="0 0 300 300" role="img" aria-label="Brief and marker sketch"><rect x="55" y="62" width="190" height="176" fill="#fff9ee" stroke="#171412" stroke-width="8"/><line x1="82" y1="104" x2="215" y2="104" stroke="#171412" stroke-width="8"/><line x1="82" y1="134" x2="190" y2="134" stroke="#171412" stroke-width="8"/><line x1="82" y1="164" x2="224" y2="164" stroke="#171412" stroke-width="8"/><circle cx="214" cy="207" r="28" fill="#f05a28" stroke="#171412" stroke-width="8"/></svg>`,
+      ad: `<svg viewBox="0 0 300 300" role="img" aria-label="End of the Plain Plane poster"><rect x="38" y="40" width="224" height="220" fill="#fff9ee" stroke="#171412" stroke-width="8"/><text x="58" y="100" font-family="Arial" font-size="34" font-weight="900" fill="#171412">END</text><text x="58" y="137" font-family="Arial" font-size="34" font-weight="900" fill="#171412">OF THE</text><text x="58" y="174" font-family="Arial" font-size="34" font-weight="900" fill="#f05a28">PLAIN</text><path d="M65 218 L230 196 L238 210 L74 234 Z" fill="#00a7b5" stroke="#171412" stroke-width="6"/></svg>`,
+      grid: `<svg viewBox="0 0 300 300" role="img" aria-label="Design system grid"><rect x="40" y="40" width="220" height="220" fill="#fff9ee" stroke="#171412" stroke-width="8"/><rect x="40" y="40" width="110" height="110" fill="#f05a28" stroke="#171412" stroke-width="6"/><rect x="150" y="40" width="110" height="110" fill="#f3ba31" stroke="#171412" stroke-width="6"/><rect x="40" y="150" width="110" height="110" fill="#00a7b5" stroke="#171412" stroke-width="6"/><rect x="150" y="150" width="110" height="110" fill="#1b4f9c" stroke="#171412" stroke-width="6"/></svg>`,
+      uniform: `<svg viewBox="0 0 300 300" role="img" aria-label="Pucci uniform silhouette"><circle cx="150" cy="62" r="34" fill="#fff9ee" stroke="#171412" stroke-width="8"/><path d="M93 116 L207 116 L235 246 L65 246 Z" fill="#00a7b5" stroke="#171412" stroke-width="8"/><path d="M112 120 L188 120 L172 246 L128 246 Z" fill="#f05a28" stroke="#171412" stroke-width="6"/><path d="M105 58 C118 26 182 26 195 58 C178 44 122 44 105 58 Z" fill="#fff9ee" stroke="#171412" stroke-width="8"/></svg>`,
+      calder: `<svg viewBox="0 0 300 300" role="img" aria-label="Calder aircraft abstraction"><rect x="28" y="114" width="230" height="54" rx="28" fill="#fff9ee" stroke="#171412" stroke-width="8"/><path d="M60 122 C95 150 120 90 155 128 C185 160 210 105 248 138" fill="none" stroke="#d83323" stroke-width="15"/><path d="M80 164 C120 120 154 194 202 145" fill="none" stroke="#1b4f9c" stroke-width="13"/><circle cx="213" cy="126" r="19" fill="#f3ba31" stroke="#171412" stroke-width="6"/><path d="M117 166 L176 238 L139 238 L87 166 Z" fill="#fff9ee" stroke="#171412" stroke-width="8"/></svg>`,
+      luxury: `<svg viewBox="0 0 300 300" role="img" aria-label="Halston Ultra Look abstraction"><rect x="55" y="42" width="190" height="216" rx="8" fill="#2a241f" stroke="#171412" stroke-width="8"/><path d="M95 66 H205 V236 H95 Z" fill="#8d6b43" stroke="#fff9ee" stroke-width="8"/><line x1="150" y1="66" x2="150" y2="236" stroke="#fff9ee" stroke-width="6"/><circle cx="132" cy="136" r="6" fill="#fff9ee"/><circle cx="168" cy="136" r="6" fill="#fff9ee"/></svg>`,
+      memory: `<svg viewBox="0 0 300 300" role="img" aria-label="Grounded plane memory"><path d="M42 168 L246 132 L258 150 L54 190 Z" fill="#fff9ee" stroke="#171412" stroke-width="8"/><line x1="62" y1="218" x2="238" y2="218" stroke="#fff9ee" stroke-width="10"/><line x1="80" y1="238" x2="220" y2="238" stroke="#fff9ee" stroke-width="10"/><circle cx="108" cy="184" r="14" fill="#f05a28" stroke="#171412" stroke-width="6"/><circle cx="198" cy="166" r="14" fill="#00a7b5" stroke="#171412" stroke-width="6"/></svg>`
+    };
+
+    const buttons = document.querySelectorAll(".time-btn");
+    const stageVisual = document.getElementById("stageVisual");
+    const stageMark = document.getElementById("stageMark");
+    const stageTitle = document.getElementById("stageTitle");
+    const stageBody = document.getElementById("stageBody");
+    const stageNote = document.getElementById("stageNote");
+
+    function renderEvent(index) {
+      const event = events[index];
+      buttons.forEach((button) => button.classList.toggle("active", Number(button.dataset.index) === index));
+      stageVisual.dataset.year = event.year;
+      stageVisual.style.setProperty("--stage", event.color);
+      stageMark.innerHTML = svgs[event.visual];
+      stageTitle.textContent = event.title;
+      stageBody.textContent = event.body;
+      stageNote.textContent = event.note;
+    }
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => renderEvent(Number(button.dataset.index)));
+    });
+
+    renderEvent(0);
+  </script>
+</body>
+</html>
